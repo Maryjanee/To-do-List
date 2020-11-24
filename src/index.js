@@ -13,6 +13,7 @@ const createCategories = (arr) =>{
   arr.forEach(item => {
     let newCategory = document.createElement('button');
     newCategory.innerText = item.name;
+    newCategory.className = "list";
     categoriesContainer.appendChild(newCategory);
   });
   return categoriesContainer

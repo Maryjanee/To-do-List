@@ -1,6 +1,8 @@
 $purple:#1b2280;
 $white: #fff;
 $black: #000;
+$yellow: rgb(255, 186, 36);
+$red: rgb(255, 22, 22);
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
@@ -15,6 +17,20 @@ $black: #000;
   text-align: center;
 }
 
+body {
+  display: flex;
+}
+
+main {
+  width: 70%;
+  height: 100vh;
+  padding-left: 2em;
+}
+
+h1 {
+  margin-bottom: 3em;
+}
+
 .list-heading {
   font-size: 2.2em;
   margin-bottom: 1em;
@@ -25,17 +41,16 @@ $black: #000;
 }
 
 nav {
-  position: absolute;
   top: 0;
   left: 0;
   height: 100vh;
   background: $purple;
-  width: 25vw;
+  width: 30%;
   color: $white;
   padding: 2rem;
 }
 
-button {
+.list {
   border: 0;
   display: block;
   background: transparent;
@@ -44,6 +59,7 @@ button {
   margin-bottom: 1em;
   cursor: pointer;
 }
+
 
 .img {
   width: 2.3rem;
@@ -67,6 +83,99 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+
+.task {
+  width: 70%;
+  
+  &-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #bdbdbd;
+    padding: 0.5em;
+
+    &-text {
+      display: flex;
+      align-items: center;
+      width: 50%;
+
+      p {
+        margin-left: 1em;
+      }
+    }
+
+    &-end {
+      display: flex;
+
+      div {
+        display: flex;
+        align-items: center;
+      }
+
+      .edit-btn {
+        border: none;
+        background-color: $purple;
+        color: white;
+        padding: 0.5em;
+        border-radius: 0.5em;
+        margin-right: 0.5em;        
+      }
+
+      .info-btn {
+        @extend .edit-btn;
+        background-color: $yellow;
+      }
+
+      .delete-btn {
+        @extend .edit-btn;
+        background-color: $red;
+      }
+
+    }
+  }
+  
+  &-hidden {
+    padding: 0.7em;
+    display: flex;
+    justify-content: space-between;
+
+    &-desc {
+      width: 40%;
+      p {
+        margin-top: 1em;
+        width: 100%;
+        font-size: 0.7em;
+      }
+    }
+
+    &-priority {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20%; 
+
+      p {
+        margin-top: 1.3em;
+        font-size: 1.4em;
+        color: red;
+      }
+    }
+
+    &-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 25%;
+      
+      p {
+        margin-top: 1.3em;
+        font-size: 1.4em;
+      }
+
+    }
+  }
+}
+
 
 // MODAL STYLING 
 
