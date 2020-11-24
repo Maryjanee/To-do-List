@@ -4,7 +4,7 @@ export default class List {
     this.todos = [];
   }
 
-  addToLists() {
+  addToLists(allLists) {
     allLists.push(this);
   }
 
@@ -12,7 +12,7 @@ export default class List {
     this.todos.push(todos);
   }
 
-  deleteList() {
+  deleteList(allLists) {
     let list = allLists.find(e => e.name == this.name)
     let index = allLists.indexOf(list);
     if (index > -1) {
