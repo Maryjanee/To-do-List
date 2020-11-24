@@ -7,6 +7,7 @@ import './styles.scss';
 const categories = document.querySelector('#categories-container');
 const img = document.createElement('img');
 img.src = addBtn;
+img.className = "add-button";
 
 categories.appendChild(img);
 
