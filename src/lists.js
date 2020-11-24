@@ -1,4 +1,4 @@
-class List {
+export default class List {
   constructor(name) {
     this.name = name;
     this.todos = [];
@@ -21,13 +21,3 @@ class List {
   }
 }
 
-const allLists = new Array();
-const defaultList = new List("Tasks");
-allLists.push(defaultList);
-
-const newList = new List('Work');
-newList.addToLists()
-newList.deleteList()
-
-
-console.log(allLists)
