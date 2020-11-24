@@ -4,11 +4,11 @@ import addBtn from './assets/plus.svg';
 
 import './styles.scss';
 
-const navBar = document.querySelector('nav');
+const categories = document.querySelector('#categories-container');
 const img = document.createElement('img');
 img.src = addBtn;
 
-navBar.appendChild(img);
+categories.appendChild(img);
 
 const allLists = [];
 const defaultList = new List('Tasks');
