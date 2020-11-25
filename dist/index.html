@@ -8,7 +8,7 @@
 <body>
   <nav>
     <h2 class="list-heading">MyLists</h2>
-      <button class="list">All</button>    
+      <button id="all-list" class="list">All</button>    
       <button id="default-project" class='list'>Unlisted</button>
       <div id="categories-container">
         <h3 id="categories" class="headings">Categories</h3>
@@ -21,36 +21,37 @@
   </nav>
   <main>
     <h1 class="text-center">Task Manager</h1>
-    <div class="task">
-      <div class="task-body">
-        <div class="task-body-text">
-          <input type="checkbox" name="check" id="checkbox">
-          <p>Fix Project</p>
+    <div id="task-listing">
+      <div class="task">
+        <div class="task-body">
+          <div class="task-body-text">
+            <input type="checkbox" name="check" id="checkbox">
+            <p>Fix Project</p>
+          </div>
+          <div class="task-body-end">
+            <button class="info-btn">More Info</button>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
         </div>
-        <div class="task-body-end">
-          <button class="info-btn">More Info</button>
-          <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
-        </div>
-      </div>
-      <div class="task-hidden">
-        <div class="task-hidden-desc">
-          <h5>Description:</h5>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate totam porro omnis nemo corporis nesciunt quae quos ad quis, eveniet optio earum! Laboriosam minima deleniti repellat saepe autem doloremque molestias.</p>
-        </div>
-        <div class="task-hidden-priority">
-          <h5>Priority</h5>
-          <p>High</p>
-        </div>
-        <div class="task-hidden-date">
-          <h5>Due Date</h5>
-          <p>10/12</p>
-        </div>
+        <div class="task-hidden">
+          <div class="task-hidden-desc">
+            <h5>Description:</h5>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate totam porro omnis nemo corporis nesciunt quae quos ad quis, eveniet optio earum! Laboriosam minima deleniti repellat saepe autem doloremque molestias.</p>
+          </div>
+          <div class="task-hidden-priority">
+            <h5>Priority</h5>
+            <p>High</p>
+          </div>
+          <div class="task-hidden-date">
+            <h5>Due Date</h5>
+            <p>10/12</p>
+          </div>
 
+        </div>
       </div>
     </div>
 
-    </div>
 
   </main>
   <div id="myModal" class="modal">
@@ -73,7 +74,7 @@
    </div>
    <div class="task-field">
       <label for="task-title">Task Description</label>
-      <input type="text" id="task-title">
+      <input type="text" id="task-description">
    </div>
    <div class="task-field">
     <label for="task-priority"> Task Priority</label>
@@ -94,7 +95,7 @@
      <input type="date" id="due-date">
    </div>
    
-   <input type="submit" value="Create Task">
+   <input type="submit" value="Create Task" id="create-task">
    </form>
         
       </div>

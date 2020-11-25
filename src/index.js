@@ -1,14 +1,38 @@
-import List from './lists';
-import addBtn from './assets/plus.svg';
-import './styles.scss';
-import modalObj from './modal';
+import List from './lists'
+import './styles.scss'
+import modalObj from './modal'
+import displayTasks from './displaytasks'
+import {Task, createTask} from './task'
+import allLists from './variables'
 
-let allLists = [];
+
+
 let categoriesContainer = document.querySelector('.all-categories');
 let moreInfoBtn = document.querySelector('.info-btn');
 let taskCategory = document.querySelector('#task-category'); 
 
 
+// TESTING 
+let allList = document.getElementById('all-list');
+let customListArray = new List('All');
+customListArray.addToLists(allLists);
+let newTask = createTask("Test","Testing","This date","Low","any");
+
+let allListArray = allLists.find(e => e.name == "All");
+console.log(allListArray)
+allList.addEventListener('click', () => {
+  displayTasks(allListArray)
+});
+
+// let createTaskBtn = document.getElementById('create-task');
+// let titleValue = document.getElementById('task-title').value
+// let descriptionValue = document.getElementById('task-description').value
+// let priorityValue = document.getElementById('task-priority').value
+// let duedateValue = document.getElementById('task-duedate').value
+// let categoryValue = document.getElementById('task-category').value
+
+// createTaskBtn.onclick = () => { createTask(titleValue, descriptionValue, descriptionValue,priorityValue, categoryValue) }
+// TESTING END
 
 modalObj.btn().onclick = modalObj.btnclick;
 modalObj.span().onclick = modalObj.closeclick;
@@ -37,6 +61,8 @@ modalObj.submit().addEventListener('click', () => {
    list.addToLists(allLists);
    createCategories(allLists)
 })
+
+let todoInfo = document.querySelector('.task-hidden');
 
 moreInfoBtn.addEventListener("click", ()=>{
   if(todoInfo.style.display == 'none'){
