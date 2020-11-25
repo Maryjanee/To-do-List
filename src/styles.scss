@@ -45,7 +45,7 @@ nav {
   left: 0;
   height: 100vh;
   background: $purple;
-  width: 30%;
+  width: 20%;
   color: $white;
   padding: 2rem;
 }
@@ -136,7 +136,7 @@ nav {
   
   &-hidden {
     padding: 0.7em;
-    display: flex;
+    display: none;
     justify-content: space-between;
 
     &-desc {

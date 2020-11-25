@@ -5,7 +5,6 @@ export default class TodoItem {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.myLists = [];
     this.completeStatus = false;
   }
 
@@ -34,5 +33,6 @@ export default class TodoItem {
       this.completeStatus = false
     }
   }
+ 
 
 }

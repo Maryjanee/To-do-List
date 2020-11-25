@@ -63,6 +63,44 @@
       <span class="close">&times;</span>
     </div>  
   </div>
+  
+   <div id="taskModal">
+    <div class="task-modal-content">      
+   <form>
+   <div class="task-field">
+      <label for="task-title">Task Title</label>
+      <input type="text" id="task-title">
+   </div>
+   <div class="task-field">
+      <label for="task-title">Task Description</label>
+      <input type="text" id="task-title">
+   </div>
+   <div class="task-field">
+    <label for="task-priority"> Task Priority</label>
+    <select name="priority" id="task-priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+   </div>
+   <div class="task-field">
+     <label for="Category">Select A Category for your Task</label>
+     <select id="task-category">
+       <option value="unlisted">Unlisted</option>
+    </select>
+   </div>
+   <div class="task-field">
+     <label for="due-date">Due Date</label>
+     <input type="date" id="due-date">
+   </div>
+   
+   <input type="submit" value="Create Task">
+   </form>
+        
+      </div>
+      <span class="close">&times;</span>
+    </div>  
+  </div>
 
 
   <script src="main.js"></script>
