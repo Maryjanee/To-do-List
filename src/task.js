@@ -44,11 +44,9 @@ const createTask = (title, description, duedate, priority,  category) => {
   let all = allLists.find(e => e.name == 'All');
   let choice = allLists.find(e => e.name == category);
   all.todos.push(task);
-  // choice.todos.push(task);
-
-  
-
-
+  choice.todos.push(task);
+//  console.log(allLists)
+  return all
 }
 
 
