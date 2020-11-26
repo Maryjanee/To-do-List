@@ -6,5 +6,5 @@ let unlisted = new List('Unlisted');
 allLists.push(all);
 allLists.push(unlisted);
 
-let currentCategory = []; 
-export default allLists;
+let currentCategory = all; 
+export {allLists, all, unlisted, currentCategory}

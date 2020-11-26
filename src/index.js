@@ -3,7 +3,8 @@ import './styles.scss'
 import modalObj from './modal'
 import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
-import allLists from './variables'
+import  {allLists, all, unlisted, currentCategory} from './variables';
+import updateCurrent from './controls'
 
 
 
@@ -39,9 +40,13 @@ const createCategories = (arr) =>{
     let newOption = document.createElement('option')
     newCategory.innerText = item.name;
     newCategory.className = "list";
+    newCategory.onclick = (item)=> {
+      updateCurrent(item.getName);
+      displayTasks(item);
+    }
+    
     newOption.innerText = item.name;
     newOption.value = item.name;
-    
     taskCategory.appendChild(newOption);
     categoriesContainer.appendChild(newCategory);
 
@@ -52,10 +57,11 @@ const createCategories = (arr) =>{
 
 modalObj.submit().addEventListener('click', () => {
   let newProject = modalObj.input().value;
-  modalObj.input().value = "";
+    modalObj.input().value = "";
    let list = new List(newProject);
    list.addToLists(allLists);
-   createCategories(allLists)
+   createCategories(allLists);
+   
 })
 
 let todoInfo = document.querySelector('.task-hidden');

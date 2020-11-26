@@ -19,5 +19,8 @@ export default class List {
       allLists.splice(index, 1);
     }
   }
+  getName(){
+    return this.name
+  }
 }
 
