@@ -1,16 +1,16 @@
 import List from "./lists";
 
 let allLists = [];
-let all = new List('All');
+let allTasks = new List('All');
 let unlisted = new List('Unlisted');
-allLists.push(all);
+allLists.push(allTasks);
 allLists.push(unlisted);
 
-let currentCategory = all;
+let currentCategory = allTasks;
 
 const updateCurrent = (name) =>{
   currentCategory = allLists.find(e => e.name == name);  
 }
 
 
-export {allLists, all, unlisted, currentCategory, updateCurrent}
+export {allLists, allTasks, unlisted, currentCategory, updateCurrent}

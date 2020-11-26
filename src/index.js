@@ -3,19 +3,19 @@ import './styles.scss'
 import modalObj from './modal'
 import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
-import  {allLists, all, unlisted, currentCategory, updateCurrent} from './variables';
-
+import  {allLists, allTasks, unlisted, currentCategory, updateCurrent} from './variables';
 
 let categoriesContainer = document.querySelector('.all-categories');
+let myListsContainer = document.querySelector('#my-lists');
 let moreInfoBtn = document.querySelector('.info-btn');
 let taskCategory = document.querySelector('#task-category'); 
 let createTaskForm = document.getElementById('create-task-form')
 
+const createCategories = (arr, dom) =>{
+  if(dom == categoriesContainer) {
+    arr = arr.slice(2);
+  }
 
-modalObj.btn().onclick = modalObj.btnclick;
-modalObj.span().onclick = modalObj.closeclick;
-
-const createCategories = (arr) =>{
   arr.forEach(item => {
     let newCategory = document.createElement('button');
     let newOption = document.createElement('option')
@@ -25,24 +25,32 @@ const createCategories = (arr) =>{
       updateCurrent(item.name);
       displayTasks(item);
     }
-    
     newOption.innerText = item.name;
     newOption.value = item.name;
     taskCategory.appendChild(newOption);
-    categoriesContainer.appendChild(newCategory);
-
-    
+    dom.appendChild(newCategory);
   });
-  return categoriesContainer
+
+  return dom
 } 
+
+createCategories(allLists, myListsContainer);
+
+
+
+modalObj.btn().onclick = modalObj.btnclick;
+modalObj.span().onclick = modalObj.closeclick;
+
+
 
 modalObj.submit().addEventListener('click', () => {
   let newProject = modalObj.input().value;
-    modalObj.input().value = "";
+   modalObj.input().value = "";
    let list = new List(newProject);
-   list.addToLists(allLists);
-   createCategories(allLists);
-   
+   console.log(allLists)
+   allLists.push(list);
+   console.log(allLists)
+   createCategories(allLists, categoriesContainer);   
 })
 
 let todoInfo = document.querySelector('.task-hidden');

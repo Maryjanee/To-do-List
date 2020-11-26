@@ -4,8 +4,9 @@ export default class List {
     this.todos = [];
   }
 
-  addToLists(allLists) {
-    allLists.push(this);
+  addToLists(list) {
+    console.log(this)
+    list.push(this);
   }
 
   assignToDos(todos) {
