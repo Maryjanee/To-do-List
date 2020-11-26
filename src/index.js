@@ -11,6 +11,8 @@ let moreInfoBtn = document.querySelector('.info-btn');
 let taskCategory = document.querySelector('#task-category'); 
 let createTaskForm = document.getElementById('create-task-form')
 
+
+
 const createCategories = (arr, dom) =>{
   if(dom == categoriesContainer) {
     arr = arr.slice(2);
@@ -41,8 +43,6 @@ createCategories(allLists, myListsContainer);
 modalObj.btn().onclick = modalObj.btnclick;
 modalObj.span().onclick = modalObj.closeclick;
 
-
-
 modalObj.submit().addEventListener('click', () => {
   let newProject = modalObj.input().value;
    modalObj.input().value = "";
@@ -55,14 +55,7 @@ modalObj.submit().addEventListener('click', () => {
 
 let todoInfo = document.querySelector('.task-hidden');
 
-moreInfoBtn.addEventListener("click", ()=>{
-  if(todoInfo.style.display == 'none'){
-    todoInfo.style.display = 'block';
-    todoInfo.style.display = 'flex';
-  }else{
-    todoInfo.style.display = 'none'; 
-  } 
-})
+
 
 createTaskForm.addEventListener('submit',(e)=>{
   e.preventDefault();
