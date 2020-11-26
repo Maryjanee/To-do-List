@@ -1,5 +1,5 @@
 import displayTasks from './displaytasks';
-import allLists from './variables'
+import {allLists, currentCategory } from './variables'
 
 class Task {
   
@@ -45,8 +45,8 @@ const createTask = (title, description, duedate, priority,  category) => {
   let choice = allLists.find(e => e.name == category);
   all.todos.push(task);
   choice.todos.push(task);
-//  console.log(allLists)
-  return all
+  console.log(currentCategory)
+  return currentCategory
 }
 
 

@@ -3,9 +3,7 @@ import './styles.scss'
 import modalObj from './modal'
 import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
-import  {allLists, all, unlisted, currentCategory} from './variables';
-import updateCurrent from './controls'
-
+import  {allLists, all, unlisted, currentCategory, updateCurrent} from './variables';
 
 
 let categoriesContainer = document.querySelector('.all-categories');
@@ -13,23 +11,6 @@ let moreInfoBtn = document.querySelector('.info-btn');
 let taskCategory = document.querySelector('#task-category'); 
 let createTaskForm = document.getElementById('create-task-form')
 
-
-// TESTING 
-// let allList = document.getElementById('all-list');
-// let customListArray = new List('All');
-// customListArray.addToLists(allLists);
-// let newTask = createTask("Test","Testing","This date","Low","any");
-
-// let allListArray = allLists.find(e => e.name == "All");
-// console.log(allListArray)
-// allList.addEventListener('click', () => {
-//   displayTasks(allListArray)
-// });
-
-
-
-// createTaskBtn.onclick = () => { createTask(titleValue, descriptionValue, descriptionValue,priorityValue, categoryValue) }
-// TESTING END
 
 modalObj.btn().onclick = modalObj.btnclick;
 modalObj.span().onclick = modalObj.closeclick;
@@ -40,8 +21,8 @@ const createCategories = (arr) =>{
     let newOption = document.createElement('option')
     newCategory.innerText = item.name;
     newCategory.className = "list";
-    newCategory.onclick = (item)=> {
-      updateCurrent(item.getName);
+    newCategory.onclick = () => {
+      updateCurrent(item.name);
       displayTasks(item);
     }
     
@@ -83,8 +64,8 @@ createTaskForm.addEventListener('submit',(e)=>{
   let duedateValue = document.getElementById('task-duedate').value;
   let changedCat = document.getElementById('task-category').value
   let categoryValue = changedCat.charAt(0).toUpperCase() + changedCat.slice(1);
-  let newTask = createTask(titleValue, descriptionValue, priorityValue, duedateValue, categoryValue);
-   displayTasks(newTask);
+  let current = createTask(titleValue, descriptionValue, priorityValue, duedateValue, categoryValue);
+   displayTasks(current);
   
   
 })

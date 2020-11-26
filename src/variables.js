@@ -6,5 +6,11 @@ let unlisted = new List('Unlisted');
 allLists.push(all);
 allLists.push(unlisted);
 
-let currentCategory = all; 
-export {allLists, all, unlisted, currentCategory}
+let currentCategory = all;
+
+const updateCurrent = (name) =>{
+  currentCategory = allLists.find(e => e.name == name);  
+}
+
+
+export {allLists, all, unlisted, currentCategory, updateCurrent}
