@@ -65,7 +65,7 @@ createTaskForm.addEventListener('submit',(e)=>{
   let duedateValue = document.getElementById('task-duedate').value;
   let changedCat = document.getElementById('task-category').value
   let categoryValue = changedCat.charAt(0).toUpperCase() + changedCat.slice(1);
-  let current = createTask(titleValue, descriptionValue, priorityValue, duedateValue, categoryValue);
+  let current = createTask(titleValue, descriptionValue, priorityValue, categoryValue, duedateValue);
    displayTasks(current);
   
   

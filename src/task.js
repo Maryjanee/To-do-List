@@ -3,10 +3,10 @@ import {allLists, currentCategory } from './variables'
 
 class Task {
   
-  constructor(title, description, dueDate, priority, category, completeStatus){
+  constructor(title, description, priority, category, duedate){
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.duedate = duedate;
     this.priority = priority;
     this.category = category;
     this.completeStatus = false;
@@ -19,7 +19,7 @@ class Task {
     this.description = newDesc;
   }
   editDate(newDate){
-    this.dueDate = newDate;
+    this.duedate = newDate;
   }
   
   editPriority(newPrio){
@@ -39,8 +39,8 @@ class Task {
   }
 }
 
-const createTask = (title, description, duedate, priority,  category) => {
-  let task = new Task(title, description, duedate, priority, category, false);
+const createTask = (title, description, priority, category, duedate) => {
+  let task = new Task(title, description, priority, category, duedate);
   let all = allLists.find(e => e.name == 'All');
   console.log(allLists)
   let choice = allLists.find(e => e.name == category);
