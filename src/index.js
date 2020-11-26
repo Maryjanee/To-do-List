@@ -17,6 +17,14 @@ const createCategories = (arr, dom) =>{
   if(dom == categoriesContainer) {
     arr = arr.slice(2);
   }
+  while (dom.firstChild) {
+    dom.removeChild(dom.firstChild);
+}
+  taskCategory.innerHTML = "";
+  let unlisted = document.createElement('option');
+  unlisted.innerText = "Unlisted";
+  unlisted.value = 'Unlisted';
+  taskCategory.appendChild(unlisted)
 
   arr.forEach(item => {
     let newCategory = document.createElement('button');
@@ -29,6 +37,7 @@ const createCategories = (arr, dom) =>{
     }
     newOption.innerText = item.name;
     newOption.value = item.name;
+
     taskCategory.appendChild(newOption);
     dom.appendChild(newCategory);
   });
@@ -63,12 +72,10 @@ createTaskForm.addEventListener('submit',(e)=>{
   let descriptionValue = document.getElementById('task-description').value;
   let priorityValue = document.getElementById('task-priority').value;
   let duedateValue = document.getElementById('task-duedate').value;
-  let changedCat = document.getElementById('task-category').value
-  let categoryValue = changedCat.charAt(0).toUpperCase() + changedCat.slice(1);
+  let categoryValue = document.getElementById('task-category').value;
   let current = createTask(titleValue, descriptionValue, priorityValue, categoryValue, duedateValue);
    displayTasks(current);
-  
-  
+
 })
 
 

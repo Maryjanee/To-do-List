@@ -1,3 +1,4 @@
+import { allLists, currentCategory } from "./variables";
 
 
 const displayTasks = (array) => {
@@ -7,6 +8,7 @@ const displayTasks = (array) => {
 
     let task = document.createElement('div');
     task.className = "task";
+    task.id = element.title
     let taskBody = document.createElement('div');
     taskBody.className = "task-body";
     let taskHidden = document.createElement('div');
@@ -19,8 +21,8 @@ const displayTasks = (array) => {
                           </div>
                           <div class="task-body-end">
                             <button class="info-btn" id=info${i}>More Info</button>
-                            <button class="edit-btn">Edit</button>
-                            <button class="delete-btn">Delete</button>
+                            <button class="edit-btn" >Edit</button>
+                            <button class="delete-btn" id=del${i}>Delete</button>
                           </div>`;
     taskHidden.innerHTML = `<div class="task-hidden-desc">
                               <h5>Description:</h5>
@@ -41,6 +43,8 @@ const displayTasks = (array) => {
 
 
     let info = document.getElementById(`info${i}`);
+    let deleteBtn = document.getElementById(`del${i}`);
+   deleteBtn.addEventListener('click', () => deleteTask(element.title, element.category))
     info.addEventListener('click', () => showInfo(`task${i}`));
   })
 
@@ -56,6 +60,17 @@ const showInfo = (index) => {
     element.style.display = 'none'; 
   } 
   console.log(element)
+}
+
+const deleteTask = (taskTitle, category) =>{
+  let choice = allLists.find(e => e.name == category)
+  let delIndex = choice.todos.findIndex(e => e.title == taskTitle);
+  choice.todos.splice(delIndex, 1);
+  
+  let allTasks = allLists.find(e => e.name == 'All')
+  let allTasksIndex = allTasks.todos.findIndex(e => e.title == taskTitle);
+  allTasks.todos.splice(allTasksIndex, 1);
+  displayTasks(currentCategory)
 }
 
 
