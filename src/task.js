@@ -42,11 +42,9 @@ class Task {
 const createTask = (title, description, priority, category, duedate) => {
   let task = new Task(title, description, priority, category, duedate);
   let all = allLists.find(e => e.name == 'All');
-  console.log(allLists)
   let choice = allLists.find(e => e.name == category);
   all.todos.push(task);
   choice.todos.push(task);
-  console.log(currentCategory)
   return currentCategory
 }
 

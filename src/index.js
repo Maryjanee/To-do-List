@@ -4,12 +4,13 @@ import modalObj from './modal'
 import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
 import  {allLists, allTasks, unlisted, currentCategory, updateCurrent} from './variables';
+import localStorageVals from './localStorage';
 
 let categoriesContainer = document.querySelector('.all-categories');
 let myListsContainer = document.querySelector('#my-lists');
 let moreInfoBtn = document.querySelector('.info-btn');
 let taskCategory = document.querySelector('#task-category'); 
-let createTaskForm = document.getElementById('create-task-form')
+let createTaskForm = document.getElementById('create-task-form');
 
 
 
@@ -58,7 +59,6 @@ modalObj.submit().addEventListener('click', () => {
    let list = new List(newProject);
    console.log(allLists)
    allLists.push(list);
-   console.log(allLists)
    createCategories(allLists, categoriesContainer);   
 })
 

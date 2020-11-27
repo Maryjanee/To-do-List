@@ -1,6 +1,8 @@
 import List from "./lists";
 
 let allLists = [];
+
+if(loc)
 let allTasks = new List('All');
 let unlisted = new List('Unlisted');
 allLists.push(allTasks);

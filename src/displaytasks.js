@@ -54,7 +54,7 @@ const displayTasks = (array) => {
 const showInfo = (index) => {
   let element =  document.getElementById(index);
   console.log(element)
-  if(element.style.display == 'none'){
+  if(element.style.display ==='none'){
     element.style.display = 'flex';
   }else{
     element.style.display = 'none'; 
