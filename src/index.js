@@ -3,7 +3,6 @@ import './styles.scss'
 import modalObj from './modal'
 import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
-import  {allLists, allTasks, unlisted, currentCategory, updateCurrent} from './variables';
 import localStorageVals from './localStorage';
 
 let categoriesContainer = document.querySelector('.all-categories');
@@ -13,6 +12,23 @@ let taskCategory = document.querySelector('#task-category');
 let createTaskForm = document.getElementById('create-task-form');
 
 
+let allLists = [];
+
+if (localStorage['allLists']) {
+  allLists = JSON.parse(localStorage.getItem('allLists'));
+} else {
+  let allTasks = new List('All');
+  let unlisted = new List('Unlisted');
+  allLists.push(allTasks);
+  allLists.push(unlisted);
+}
+
+let currentCategory = allLists[0];
+displayTasks(currentCategory);
+
+const updateCurrent = (name) =>{
+  currentCategory = allLists.find(e => e.name == name);
+}
 
 const createCategories = (arr, dom) =>{
   if(dom == categoriesContainer) {
@@ -34,7 +50,7 @@ const createCategories = (arr, dom) =>{
     newCategory.className = "list";
     newCategory.onclick = () => {
       updateCurrent(item.name);
-      displayTasks(item);
+      displayTasks(item, allLists, currentCategory);
     }
     newOption.innerText = item.name;
     newOption.value = item.name;
@@ -42,13 +58,13 @@ const createCategories = (arr, dom) =>{
     taskCategory.appendChild(newOption);
     dom.appendChild(newCategory);
   });
-
+  localStorageVals(allLists);
   return dom
 } 
 
-createCategories(allLists, myListsContainer);
 
-
+createCategories(allLists.slice(0,2), myListsContainer);
+createCategories(allLists, categoriesContainer);
 
 modalObj.btn().onclick = modalObj.btnclick;
 modalObj.span().onclick = modalObj.closeclick;
@@ -57,14 +73,12 @@ modalObj.submit().addEventListener('click', () => {
   let newProject = modalObj.input().value;
    modalObj.input().value = "";
    let list = new List(newProject);
-   console.log(allLists)
    allLists.push(list);
+   console.log(allLists)
    createCategories(allLists, categoriesContainer);   
 })
 
 let todoInfo = document.querySelector('.task-hidden');
-
-
 
 createTaskForm.addEventListener('submit',(e)=>{
   e.preventDefault();
@@ -73,11 +87,10 @@ createTaskForm.addEventListener('submit',(e)=>{
   let priorityValue = document.getElementById('task-priority').value;
   let duedateValue = document.getElementById('task-duedate').value;
   let categoryValue = document.getElementById('task-category').value;
-  let current = createTask(titleValue, descriptionValue, priorityValue, categoryValue, duedateValue);
-   displayTasks(current);
+  let current = createTask(titleValue, descriptionValue, priorityValue, categoryValue, duedateValue, allLists, currentCategory);
+   displayTasks(current, allLists, currentCategory);
 
 })
-
 
 
 

@@ -1,5 +1,5 @@
 import displayTasks from './displaytasks';
-import {allLists, currentCategory } from './variables'
+
 
 class Task {
   
@@ -39,7 +39,7 @@ class Task {
   }
 }
 
-const createTask = (title, description, priority, category, duedate) => {
+const createTask = (title, description, priority, category, duedate, allLists, currentCategory) => {
   let task = new Task(title, description, priority, category, duedate);
   let all = allLists.find(e => e.name == 'All');
   let choice = allLists.find(e => e.name == category);

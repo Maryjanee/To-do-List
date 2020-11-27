@@ -1,7 +1,6 @@
-import { allLists, currentCategory } from "./variables";
+import localStorageVals from './localStorage'
 
-
-const displayTasks = (array) => {
+const displayTasks = (array, allLists, currentCategory) => {
   let taskList = document.getElementById('task-listing');
   taskList.innerHTML = '';
   array.todos.forEach( (element, i) => {
@@ -44,8 +43,10 @@ const displayTasks = (array) => {
 
     let info = document.getElementById(`info${i}`);
     let deleteBtn = document.getElementById(`del${i}`);
-   deleteBtn.addEventListener('click', () => deleteTask(element.title, element.category))
+   deleteBtn.addEventListener('click', () => deleteTask(element.title, element.category, allLists, currentCategory))
     info.addEventListener('click', () => showInfo(`task${i}`));
+
+    localStorageVals(allLists);
   })
 
 
@@ -62,7 +63,7 @@ const showInfo = (index) => {
   console.log(element)
 }
 
-const deleteTask = (taskTitle, category) =>{
+const deleteTask = (taskTitle, category, allLists, currentCategory) =>{
   let choice = allLists.find(e => e.name == category)
   let delIndex = choice.todos.findIndex(e => e.title == taskTitle);
   choice.todos.splice(delIndex, 1);
@@ -70,7 +71,7 @@ const deleteTask = (taskTitle, category) =>{
   let allTasks = allLists.find(e => e.name == 'All')
   let allTasksIndex = allTasks.todos.findIndex(e => e.title == taskTitle);
   allTasks.todos.splice(allTasksIndex, 1);
-  displayTasks(currentCategory)
+  displayTasks(currentCategory, allLists, currentCategory)
 }
 
 

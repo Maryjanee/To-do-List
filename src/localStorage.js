@@ -1,5 +1,5 @@
 const localStorageVals = (item) =>{
-  localStorage.setItem("AllLists", JSON.stringify(item) )
+  localStorage.setItem("allLists", JSON.stringify(item) )
 }
 
 export default localStorageVals;
