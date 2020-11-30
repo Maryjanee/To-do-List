@@ -14,7 +14,10 @@ let createTaskForm = document.getElementById('create-task-form');
 
 let allLists = [];
 
+// localStorage.clear();
+
 if (localStorage['allLists']) {
+  console.log(allLists);
   allLists = JSON.parse(localStorage.getItem('allLists'));
 } else {
   let allTasks = new List('All');

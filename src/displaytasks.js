@@ -1,4 +1,6 @@
-import localStorageVals from './localStorage'
+import localStorageVals from './localStorage';
+
+const editForm = document.getElementById('edit-task-form');
 
 const displayTasks = (array, allLists, currentCategory) => {
   let taskList = document.getElementById('task-listing');
@@ -20,7 +22,7 @@ const displayTasks = (array, allLists, currentCategory) => {
                           </div>
                           <div class="task-body-end">
                             <button class="info-btn" id=info${i}>More Info</button>
-                            <button class="edit-btn" >Edit</button>
+                            <button class="edit-btn" id=edit${i}>Edit</button>
                             <button class="delete-btn" id=del${i}>Delete</button>
                           </div>`;
     taskHidden.innerHTML = `<div class="task-hidden-desc">
@@ -40,12 +42,16 @@ const displayTasks = (array, allLists, currentCategory) => {
     task.appendChild(taskHidden);
     taskList.appendChild(task);
 
-
     let info = document.getElementById(`info${i}`);
     let deleteBtn = document.getElementById(`del${i}`);
-   deleteBtn.addEventListener('click', () => deleteTask(element.title, element.category, allLists, currentCategory))
+    let editBtn = document.getElementById(`edit${i}`);
+    
+   deleteBtn.addEventListener('click', () =>{
+     console.log(element.title, element.category, allLists, currentCategory)
+    deleteTask(element.title, element.category, allLists, currentCategory)
+   } )
     info.addEventListener('click', () => showInfo(`task${i}`));
-
+    editBtn.addEventListener('click',() => editFunction(element, allLists, currentCategory));
     localStorageVals(allLists);
   })
 
@@ -63,6 +69,47 @@ const showInfo = (index) => {
   console.log(element)
 }
 
+const changeObjParams = (obj, title, description, priority, category, duedate) => {
+
+  obj.title = title;
+  obj.description = description;
+  obj.priority = priority;
+  obj.category = category;
+  obj.duedate = duedate;
+  return obj;
+}
+
+const editFunction = (element, allLists, currentCategory) => {
+  // editForm.style.display = "block";
+  editForm.addEventListener('submit', ()=> {
+    let editTitle = document.getElementById('edit-task-title').value;
+    let editDescription = document.getElementById('edit-task-description').value;
+    let editCategory = document.getElementById('edit-task-category').value;
+    let editPriority = document.getElementById('edit-task-priority').value
+    let editDuedate = document.getElementById('edit-task-duedate').value;
+    let tasks =  findTask(element, allLists );
+    console.log(tasks[0], tasks[1]);
+    changeObjParams(tasks[0], editTitle, editDescription,editPriority, editCategory,editDuedate );
+    changeObjParams(tasks[1], editTitle, editDescription, editPriority,editCategory,editDuedate );
+    displayTasks(currentCategory,allLists, currentCategory);
+  })
+  
+}
+
+
+const findTask = (task, allLists) =>{
+  
+  let allTasks = allLists.find(e => e.name == 'All');
+  let foundinAll =  allTasks.todos.find(e => e.title == task.title);
+
+  let found = allLists.find(e => e.name == task.category);
+  let foundincat = found.todos.find(e => e.title == task.title);
+
+  return [foundinAll, foundincat]
+
+}
+
+
 const deleteTask = (taskTitle, category, allLists, currentCategory) =>{
   let choice = allLists.find(e => e.name == category)
   let delIndex = choice.todos.findIndex(e => e.title == taskTitle);
@@ -73,6 +120,7 @@ const deleteTask = (taskTitle, category, allLists, currentCategory) =>{
   allTasks.todos.splice(allTasksIndex, 1);
   displayTasks(currentCategory, allLists, currentCategory)
 }
+
 
 
 export default displayTasks;
