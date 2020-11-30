@@ -68,12 +68,11 @@ const showInfo = (index) => {
 
 }
 
-const changeObjParams = (obj, title, description, priority, category, duedate) => {
+const changeObjParams = (obj, title, description, priority, duedate) => {
 
   obj.title = title;
   obj.description = description;
   obj.priority = priority;
-  obj.category = category;
   obj.duedate = duedate;
   return obj;
 }
@@ -86,27 +85,25 @@ const editFunction = (element, allLists, currentCategory) => {
     e.preventDefault()
     let editTitle = document.getElementById('edit-task-title').value;
     let editDescription = document.getElementById('edit-task-description').value;
-    let editCategory = document.getElementById('edit-task-category').value;
     let editPriority = document.getElementById('edit-task-priority').value
     let editDuedate = document.getElementById('edit-task-duedate').value;
     if(editTitle == "" || editDescription == "" ||editDuedate == ""){
       alert ("Please enter all the details to update the task");
     }else{
       let tasks =  findTask(element, allLists);
-   
-
-      if (element.category !== editCategory) {
-        let previousList = allLists.find(e => e.name == element.category);
-        let editIndex = previousList.todos.findIndex(e => e.title == element.title);
-        let nextList = allLists.find(e => e.name == editCategory);
-        tasks[1] = previousList.todos.splice(editIndex, 1);      
-        // nextList.todos.push(tasks[1])
-      } 
+  
+      // if (element.category !== editCategory) {
+      //   let previousList = allLists.find(e => e.name == element.category);
+      //   let editIndex = previousList.todos.findIndex(e => e.title == element.title);
+      //   let nextList = allLists.find(e => e.name == editCategory);
+      //   tasks[1] = previousList.todos.splice(editIndex, 1);      
+      //   // nextList.todos.push(tasks[1])
+      // } 
   
   
       // changeObjParams(task, editTitle, editDescription, editPriority,editCategory,editDuedate );
-      changeObjParams(tasks[0], editTitle, editDescription, editPriority, editCategory,editDuedate );
-      changeObjParams(tasks[1], editTitle, editDescription, editPriority,editCategory,editDuedate );
+      changeObjParams(tasks[0], editTitle, editDescription, editPriority,editDuedate );
+      changeObjParams(tasks[1], editTitle, editDescription, editPriority,editDuedate );
       
       console.log(currentCategory, allLists) 
       displayTasks(currentCategory, allLists, currentCategory);

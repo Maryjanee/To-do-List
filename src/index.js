@@ -5,6 +5,7 @@ import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
 import localStorageVals from './localStorage';
 
+
 let categoriesContainer = document.querySelector('.all-categories');
 let myListsContainer = document.querySelector('#my-lists');
 let moreInfoBtn = document.querySelector('.info-btn');
@@ -41,20 +42,21 @@ const createCategories = (arr, dom) =>{
     dom.removeChild(dom.firstChild);
 }
   taskCategory.innerHTML = "";
-  editTaskCategory.innerHTML = "";
   let unlisted = document.createElement('option');
   unlisted.innerText = "Unlisted";
   unlisted.value = 'Unlisted';
-  let unlisted2 = document.createElement('option');
-  unlisted2.innerText = "Unlisted";
-  unlisted2.value = 'Unlisted';
+
   taskCategory.appendChild(unlisted)
-  editTaskCategory.appendChild(unlisted2)
 
   arr.forEach(item => {
+    let parentDiv = document.createElement('div');
+    parentDiv.className = "d-flex align-center justify-sb categories";
     let newCategory = document.createElement('button');
+    let delDiv = document.createElement('div');
+    delDiv.className = "delete";
+    
     let newOption = document.createElement('option');
-    let newOption2 = document.createElement('option');
+   
     newCategory.innerText = item.name;
     newCategory.className = "list";
     newCategory.onclick = () => {
@@ -63,13 +65,30 @@ const createCategories = (arr, dom) =>{
     }
     newOption.innerText = item.name;
     newOption.value = item.name;
-    newOption2.innerText = item.name;
-    newOption2.value = item.name;
-
-
-    editTaskCategory.appendChild(newOption2);
+    parentDiv.appendChild(newCategory);
+    parentDiv.appendChild(delDiv);
+    
+    parentDiv.addEventListener("mouseover", ()=>{
+      delDiv.style.display = "block";
+    })
+    parentDiv.addEventListener("mouseout", ()=>{
+      delDiv.style.display = "none";
+    })
+    
+    delDiv.addEventListener("click" , () => {
+    
+      let delCategory = delDiv.previousElementSibling.innerText;
+      let index = allLists.findIndex(e => e.name == delCategory);
+      allLists.splice(index, 1);
+      delDiv.parentNode.remove();
+      let varcart = [...taskCategory.children].filter(e => e.innerText == delCategory)
+      varcart[0].remove();
+  
+      
+    })
+    
     taskCategory.appendChild(newOption);
-    dom.appendChild(newCategory);
+    dom.appendChild(parentDiv);
   });
   localStorageVals(allLists);
   return dom
