@@ -9,12 +9,12 @@ let categoriesContainer = document.querySelector('.all-categories');
 let myListsContainer = document.querySelector('#my-lists');
 let moreInfoBtn = document.querySelector('.info-btn');
 let taskCategory = document.querySelector('#task-category'); 
+let editTaskCategory = document.querySelector('#edit-task-category');
 let createTaskForm = document.getElementById('create-task-form');
 
+localStorage.clear()
 
 let allLists = [];
-
-// localStorage.clear();
 
 if (localStorage['allLists']) {
   console.log(allLists);
@@ -41,14 +41,20 @@ const createCategories = (arr, dom) =>{
     dom.removeChild(dom.firstChild);
 }
   taskCategory.innerHTML = "";
+  editTaskCategory.innerHTML = "";
   let unlisted = document.createElement('option');
   unlisted.innerText = "Unlisted";
   unlisted.value = 'Unlisted';
+  let unlisted2 = document.createElement('option');
+  unlisted2.innerText = "Unlisted";
+  unlisted2.value = 'Unlisted';
   taskCategory.appendChild(unlisted)
+  editTaskCategory.appendChild(unlisted2)
 
   arr.forEach(item => {
     let newCategory = document.createElement('button');
-    let newOption = document.createElement('option')
+    let newOption = document.createElement('option');
+    let newOption2 = document.createElement('option');
     newCategory.innerText = item.name;
     newCategory.className = "list";
     newCategory.onclick = () => {
@@ -57,7 +63,11 @@ const createCategories = (arr, dom) =>{
     }
     newOption.innerText = item.name;
     newOption.value = item.name;
+    newOption2.innerText = item.name;
+    newOption2.value = item.name;
 
+
+    editTaskCategory.appendChild(newOption2);
     taskCategory.appendChild(newOption);
     dom.appendChild(newCategory);
   });
@@ -77,7 +87,6 @@ modalObj.submit().addEventListener('click', () => {
    modalObj.input().value = "";
    let list = new List(newProject);
    allLists.push(list);
-   console.log(allLists)
    createCategories(allLists, categoriesContainer);   
 })
 

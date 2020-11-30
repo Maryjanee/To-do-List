@@ -45,9 +45,8 @@ const displayTasks = (array, allLists, currentCategory) => {
     let info = document.getElementById(`info${i}`);
     let deleteBtn = document.getElementById(`del${i}`);
     let editBtn = document.getElementById(`edit${i}`);
-    
+
    deleteBtn.addEventListener('click', () =>{
-     console.log(element.title, element.category, allLists, currentCategory)
     deleteTask(element.title, element.category, allLists, currentCategory)
    } )
     info.addEventListener('click', () => showInfo(`task${i}`));
@@ -60,13 +59,13 @@ const displayTasks = (array, allLists, currentCategory) => {
 
 const showInfo = (index) => {
   let element =  document.getElementById(index);
-  console.log(element)
+
   if(element.style.display ==='none'){
     element.style.display = 'flex';
   }else{
     element.style.display = 'none'; 
   } 
-  console.log(element)
+
 }
 
 const changeObjParams = (obj, title, description, priority, category, duedate) => {
@@ -80,18 +79,34 @@ const changeObjParams = (obj, title, description, priority, category, duedate) =
 }
 
 const editFunction = (element, allLists, currentCategory) => {
+  console.log(element.category)
   // editForm.style.display = "block";
-  editForm.addEventListener('submit', ()=> {
+  editForm.addEventListener('submit', (e)=> {
+    console.log(allLists,currentCategory)
+    e.preventDefault()
     let editTitle = document.getElementById('edit-task-title').value;
     let editDescription = document.getElementById('edit-task-description').value;
     let editCategory = document.getElementById('edit-task-category').value;
     let editPriority = document.getElementById('edit-task-priority').value
     let editDuedate = document.getElementById('edit-task-duedate').value;
-    let tasks =  findTask(element, allLists );
-    console.log(tasks[0], tasks[1]);
-    changeObjParams(tasks[0], editTitle, editDescription,editPriority, editCategory,editDuedate );
+    let tasks =  findTask(element, allLists);
+   
+
+    if (element.category !== editCategory) {
+      let previousList = allLists.find(e => e.name == element.category);
+      let delIndex = previousList.todos.findIndex(e => e.title == element.title);
+      let nextList = allLists.find(e => e.name == editCategory);
+      tasks[1] = previousList.todos.splice(delIndex, 1);      
+      // nextList.todos.push(tasks[1])
+    } 
+
+
+    // changeObjParams(task, editTitle, editDescription, editPriority,editCategory,editDuedate );
+    changeObjParams(tasks[0], editTitle, editDescription, editPriority, editCategory,editDuedate );
     changeObjParams(tasks[1], editTitle, editDescription, editPriority,editCategory,editDuedate );
-    displayTasks(currentCategory,allLists, currentCategory);
+    
+    console.log(currentCategory, allLists) 
+    displayTasks(currentCategory, allLists, currentCategory);
   })
   
 }
@@ -104,13 +119,13 @@ const findTask = (task, allLists) =>{
 
   let found = allLists.find(e => e.name == task.category);
   let foundincat = found.todos.find(e => e.title == task.title);
-
   return [foundinAll, foundincat]
 
 }
 
 
 const deleteTask = (taskTitle, category, allLists, currentCategory) =>{
+  console.log(category, allLists, currentCategory )
   let choice = allLists.find(e => e.name == category)
   let delIndex = choice.todos.findIndex(e => e.title == taskTitle);
   choice.todos.splice(delIndex, 1);
