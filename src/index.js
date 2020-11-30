@@ -1,5 +1,5 @@
 import List from './lists'
-import './styles.scss'
+import './styles.scss';
 import modalObj from './modal'
 import displayTasks from './displaytasks'
 import {Task, createTask} from './task'
@@ -13,7 +13,20 @@ let taskCategory = document.querySelector('#task-category');
 let editTaskCategory = document.querySelector('#edit-task-category');
 let createTaskForm = document.getElementById('create-task-form');
 
-localStorage.clear()
+let createClose = document.querySelector('#close-create');
+let createTaskBtn = document.querySelector('.add-task-btn');
+
+createTaskBtn.addEventListener('click' , () =>{
+  createTaskForm.style.display = "block";
+})
+
+
+localStorage.clear();
+createClose.addEventListener('click', ()=>{
+  createTaskForm.style.display = "none"
+})
+
+
 
 let allLists = [];
 
@@ -83,8 +96,6 @@ const createCategories = (arr, dom) =>{
       delDiv.parentNode.remove();
       let varcart = [...taskCategory.children].filter(e => e.innerText == delCategory)
       varcart[0].remove();
-  
-      
     })
     
     taskCategory.appendChild(newOption);

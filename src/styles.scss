@@ -69,8 +69,7 @@ nav {
 }
 
 .categories {
-  height:2.5rem;
-  
+  height:2.5rem; 
 }
 
 .img {
@@ -148,6 +147,7 @@ nav {
   
   &-hidden {
     padding: 0.7em;
+    
     display: none;
     justify-content: space-between;
 
@@ -241,4 +241,60 @@ nav {
   display:none
   
 
+}
+
+form{
+  position: relative;
+  padding: 1rem 3rem;
+  display: none;
+  z-index:1;
+  background: #fff;
+  
+  span{
+    display: block;
+    text-align: right;
+  }
+  width: 35vw;
+  height: 100vh;
+  border-left: 1px solid grey;
+  padding: 1rem 1.5rem;
+  
+ label {
+   display: block;
+    font-size: 1rem;
+    margin: .8rem 0;
+ }
+ 
+ input,select{
+   padding: 1rem 1.2rem;
+   width:100%;
+   border-radius:.5rem;
+   margin:.5rem 0;
+   font-size: 1rem;
+ }
+ .btn{
+   background:#5ECB84;
+   border:0;
+   color:#fff;
+   font-size: 1rem;
+ }
+}
+
+#edit-task-form {
+  display: none;
+}
+
+.add-task-btn{
+  position: absolute;
+  right:10rem;
+  bottom: 5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-image: url('./assets/create.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 1em;
+  cursor: pointer;
+ 
 }

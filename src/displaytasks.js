@@ -1,6 +1,8 @@
 import localStorageVals from './localStorage';
 
 const editForm = document.getElementById('edit-task-form');
+let editClose = document.querySelector('#close-edit')
+
 
 const displayTasks = (array, allLists, currentCategory) => {
   let taskList = document.getElementById('task-listing');
@@ -50,7 +52,9 @@ const displayTasks = (array, allLists, currentCategory) => {
     deleteTask(element.title, element.category, allLists, currentCategory)
    } )
     info.addEventListener('click', () => showInfo(`task${i}`));
-    editBtn.addEventListener('click',() => editFunction(element, allLists, currentCategory));
+    editBtn.addEventListener('click',() =>
+      editFunction(element, allLists, currentCategory)
+    );
     localStorageVals(allLists);
   })
 
@@ -69,7 +73,6 @@ const showInfo = (index) => {
 }
 
 const changeObjParams = (obj, title, description, priority, duedate) => {
-
   obj.title = title;
   obj.description = description;
   obj.priority = priority;
@@ -79,7 +82,7 @@ const changeObjParams = (obj, title, description, priority, duedate) => {
 
 const editFunction = (element, allLists, currentCategory) => {
   console.log(element.category)
-  // editForm.style.display = "block";
+  editForm.style.display = "block";
   editForm.addEventListener('submit', (e)=> {
     console.log(allLists,currentCategory)
     e.preventDefault()
@@ -109,10 +112,14 @@ const editFunction = (element, allLists, currentCategory) => {
       displayTasks(currentCategory, allLists, currentCategory);
     }
     
+    
     })
 
 
 }
+editClose.addEventListener('click', ()=>{
+  editForm.style.display = "none"
+})
 
 
 const findTask = (task, allLists) =>{
@@ -138,6 +145,8 @@ const deleteTask = (taskTitle, category, allLists, currentCategory) =>{
   allTasks.todos.splice(allTasksIndex, 1);
   displayTasks(currentCategory, allLists, currentCategory)
 }
+
+
 
 
 

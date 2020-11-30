@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
 </head>
-<body>
+<body class="d-flex">
   <nav>
     <div  id="my-lists">
       <h2 class="list-heading">MyLists</h2>     
@@ -17,9 +17,10 @@
     <div class="all-categories">
     
     </div>
-            
+      
   </nav>
   <main>
+    <div class="add-task-btn"></div>  
     <h1 class="text-center">Task Manager</h1>
     <div id="task-listing">
       <!-- <div class="task">
@@ -68,6 +69,7 @@
    <div id="taskModal">
     <div class="task-modal-content">      
    <form id="create-task-form">
+    <span id="close-create" class="close">&times;</span>
    <div class="task-field">
       <label for="task-title">Task Title</label>
       <input type="text" id="task-title">
@@ -95,16 +97,17 @@
      <input type="date" id="task-duedate">
    </div>
    
-   <input type="submit" value="Create Task" id="create-task">
+   <input type="submit" class="btn" value="Create Task" id="create-task">
    </form>
         
       </div>
-      <span class="close">&times;</span>
+      
     </div>  
   </div>
   <div id="edittaskModal">
     <div class="task-modal-content">      
    <form id="edit-task-form">
+    <span id="close-edit" class="close">&times;</span>
    <div class="task-field">
       <label for="task-title">Task Title</label>
       <input type="text" id="edit-task-title">
@@ -126,11 +129,11 @@
      <input type="date" id="edit-task-duedate">
    </div>
    
-   <input type="submit" value="update-task" id="update-task">
+   <input type="submit" class="btn" value="update-task" id="update-task">
    </form>
         
       </div>
-      <span class="close">&times;</span>
+      
     </div>  
   </div>
 
