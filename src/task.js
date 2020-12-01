@@ -1,9 +1,5 @@
-import displayTasks from './displaytasks';
-
-
 class Task {
-  
-  constructor(title, description, priority, category, duedate){
+  constructor(title, description, priority, category, duedate) {
     this.title = title;
     this.description = description;
     this.duedate = duedate;
@@ -12,45 +8,42 @@ class Task {
     this.completeStatus = false;
   }
 
-  editTitle(newTitle){
+  editTitle(newTitle) {
     this.title = newTitle;
   }
-  editDescription(newDesc){
+
+  editDescription(newDesc) {
     this.description = newDesc;
   }
-  editDate(newDate){
+
+  editDate(newDate) {
     this.duedate = newDate;
   }
-  
-  editPriority(newPrio){
+
+  editPriority(newPrio) {
     this.priority = newPrio;
   }
-  
-  assignList(list){
+
+  assignList(list) {
     list.push(this);
   }
-  
+
   toggleStatus() {
-    if(this.completeStatus == false){
+    if (this.completeStatus === false) {
       this.completeStatus = true;
-    }else{
-      this.completeStatus = false
+    } else {
+      this.completeStatus = false;
     }
   }
 }
 
 const createTask = (title, description, priority, category, duedate, allLists, currentCategory) => {
-  let task = new Task(title, description, priority, category, duedate);
-  let all = allLists.find(e => e.name == 'All');
-  let choice = allLists.find(e => e.name == category);
+  const task = new Task(title, description, priority, category, duedate);
+  const all = allLists.find(e => e.name === 'All');
+  const choice = allLists.find(e => e.name === category);
   all.todos.push(task);
   choice.todos.push(task);
-  return currentCategory
-}
+  return currentCategory;
+};
 
-const clearFormFields = (field) => {
-  
-  
-}
-
-export {Task, createTask}
+export { Task, createTask };

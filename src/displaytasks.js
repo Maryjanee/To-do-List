@@ -1,23 +1,30 @@
 import localStorageVals from './localStorage';
 
 const editForm = document.getElementById('edit-task-form');
-let editClose = document.querySelector('#close-edit')
+const editCloseBtn = document.querySelector('#close-edit');
 
+const findTask = (task, allLists) => {
+  const allTasks = allLists.find(e => e.name === 'All');
+  const foundinAll = allTasks.todos.find(e => e.title === task.title);
+
+  const found = allLists.find(e => e.name === task.category);
+  const foundincat = found.todos.find(e => e.title === task.title);
+  return [foundinAll, foundincat];
+};
 
 const displayTasks = (array, allLists, currentCategory) => {
-  let taskList = document.getElementById('task-listing');
+  const taskList = document.getElementById('task-listing');
   taskList.innerHTML = '';
-  array.todos.forEach( (element, i) => {
+  array.todos.forEach((element, i) => {
+    const task = document.createElement('div');
+    task.className = 'task';
+    task.id = element.title;
+    const taskBody = document.createElement('div');
+    taskBody.className = 'task-body';
+    const taskHidden = document.createElement('div');
+    taskHidden.className = 'task-hidden';
+    taskHidden.id = `task${i}`;
 
-    let task = document.createElement('div');
-    task.className = "task";
-    task.id = element.title
-    let taskBody = document.createElement('div');
-    taskBody.className = "task-body";
-    let taskHidden = document.createElement('div');
-    taskHidden.className = "task-hidden";
-    taskHidden.id = `task${i}`
-  
     taskBody.innerHTML = `<div class="task-body-text">
                             <input type="checkbox" name="check" id="checkbox">
                             <p>${element.title}</p>
@@ -44,33 +51,32 @@ const displayTasks = (array, allLists, currentCategory) => {
     task.appendChild(taskHidden);
     taskList.appendChild(task);
 
-    let info = document.getElementById(`info${i}`);
-    let deleteBtn = document.getElementById(`del${i}`);
-    let editBtn = document.getElementById(`edit${i}`);
+    const info = document.getElementById(`info${i}`);
+    const deleteBtn = document.getElementById(`del${i}`);
+    const editBtn = document.getElementById(`edit${i}`);
 
-   deleteBtn.addEventListener('click', () =>{
-    deleteTask(element.title, element.category, allLists, currentCategory)
-   } )
+    deleteBtn.addEventListener('click', () => {
+      deleteTask(element.title, element.category, allLists, currentCategory);
+    });
     info.addEventListener('click', () => showInfo(`task${i}`));
-    editBtn.addEventListener('click',() =>
-      editFunction(element, allLists, currentCategory)
-    );
+    editBtn.addEventListener('click', () => editFunction(element, allLists, currentCategory));
     localStorageVals(allLists);
-  })
+  });
+};
 
-
-}
+editCloseBtn.addEventListener('click', () => {
+  editForm.style.display = 'none';
+});
 
 const showInfo = (index) => {
-  let element =  document.getElementById(index);
+  const element = document.getElementById(index);
 
-  if(element.style.display ==='none'){
+  if (element.style.display === 'none') {
     element.style.display = 'flex';
-  }else{
-    element.style.display = 'none'; 
-  } 
-
-}
+  } else {
+    element.style.display = 'none';
+  }
+};
 
 const changeObjParams = (obj, title, description, priority, duedate) => {
   obj.title = title;
@@ -78,81 +84,41 @@ const changeObjParams = (obj, title, description, priority, duedate) => {
   obj.priority = priority;
   obj.duedate = duedate;
   return obj;
-}
+};
 
 const editFunction = (element, allLists, currentCategory) => {
-  console.log(element.category)
-  editForm.style.display = "block";
-  editForm.addEventListener('submit', (e)=> {
-    console.log(allLists,currentCategory)
-    e.preventDefault()
-    let editTitle = document.getElementById('edit-task-title').value;
-    let editDescription = document.getElementById('edit-task-description').value;
-    let editPriority = document.getElementById('edit-task-priority').value
-    let editDuedate = document.getElementById('edit-task-duedate').value;
-    if(editTitle == "" || editDescription == "" ||editDuedate == ""){
-      alert ("Please enter all the details to update the task");
-    }else{
-      let tasks =  findTask(element, allLists);
-      document.getElementById('edit-task-title').value = " ";
-    document.getElementById('edit-task-description').value = ""
-    document.getElementById('edit-task-priority').value = "" ;
-    document.getElementById('edit-task-category').value = "";
-    document.getElementById('edit-task-duedate').value = "";
-  
-      // if (element.category !== editCategory) {
-      //   let previousList = allLists.find(e => e.name == element.category);
-      //   let editIndex = previousList.todos.findIndex(e => e.title == element.title);
-      //   let nextList = allLists.find(e => e.name == editCategory);
-      //   tasks[1] = previousList.todos.splice(editIndex, 1);      
-      //   // nextList.todos.push(tasks[1])
-      // } 
-  
-  
-      // changeObjParams(task, editTitle, editDescription, editPriority,editCategory,editDuedate );
-      changeObjParams(tasks[0], editTitle, editDescription, editPriority,editDuedate );
-      changeObjParams(tasks[1], editTitle, editDescription, editPriority,editDuedate );
-      
-      console.log(currentCategory, allLists) 
+  editForm.style.display = 'block';
+  editForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const editTitle = document.getElementById('edit-task-title').value;
+    const editDescription = document.getElementById('edit-task-description').value;
+    const editPriority = document.getElementById('edit-task-priority').value;
+    const editDuedate = document.getElementById('edit-task-duedate').value;
+    if (editTitle === '' || editDescription === '' || editDuedate === '') {
+      alert('Please enter all the details to update the task');
+    } else {
+      const tasks = findTask(element, allLists);
+      changeObjParams(tasks[0], editTitle, editDescription, editPriority, editDuedate);
+      changeObjParams(tasks[1], editTitle, editDescription, editPriority, editDuedate);
+
+      document.getElementById('edit-task-title').value = '';
+      document.getElementById('edit-task-description').value = '';
+      document.getElementById('edit-task-priority').value = '';
+      document.getElementById('edit-task-duedate').value = '';
       displayTasks(currentCategory, allLists, currentCategory);
     }
-    
-    
-    })
+  });
+};
 
-
-}
-editClose.addEventListener('click', ()=>{
-  editForm.style.display = "none"
-})
-
-
-const findTask = (task, allLists) =>{
-  
-  let allTasks = allLists.find(e => e.name == 'All');
-  let foundinAll =  allTasks.todos.find(e => e.title == task.title);
-
-  let found = allLists.find(e => e.name == task.category);
-  let foundincat = found.todos.find(e => e.title == task.title);
-  return [foundinAll, foundincat]
-
-}
-
-
-const deleteTask = (taskTitle, category, allLists, currentCategory) =>{
-  console.log(category, allLists, currentCategory )
-  let choice = allLists.find(e => e.name == category)
-  let delIndex = choice.todos.findIndex(e => e.title == taskTitle);
+const deleteTask = (taskTitle, category, allLists, currentCategory) => {
+  const choice = allLists.find(e => e.name === category);
+  const delIndex = choice.todos.findIndex(e => e.title === taskTitle);
   choice.todos.splice(delIndex, 1);
-  
-  let allTasks = allLists.find(e => e.name == 'All')
-  let allTasksIndex = allTasks.todos.findIndex(e => e.title == taskTitle);
+
+  const allTasks = allLists.find(e => e.name === 'All');
+  const allTasksIndex = allTasks.todos.findIndex(e => e.title === taskTitle);
   allTasks.todos.splice(allTasksIndex, 1);
-  displayTasks(currentCategory, allLists, currentCategory)
-}
-
-
-
-
+  displayTasks(currentCategory, allLists, currentCategory);
+};
 
 export default displayTasks;
