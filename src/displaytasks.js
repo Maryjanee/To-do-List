@@ -1,5 +1,5 @@
 import localStorageVals from './localStorage';
-import { Task } from './task'
+import { Task } from './task';
 
 const editForm = document.getElementById('edit-task-form');
 const editCloseBtn = document.querySelector('#close-edit');
@@ -68,17 +68,17 @@ const displayTasks = (array, allLists, currentCategory) => {
   };
 
   const toggleTask = (taskTitle, allLists, currentCategory) => {
-    let task = allLists[0].todos.find(e => e.title == taskTitle);
+    const task = allLists[0].todos.find(e => e.title === taskTitle);
     Object.setPrototypeOf(task, Task.prototype);
-    let category = allLists.find(e => e.name == task.category);
-    let taskInCat = category.todos.find(e => e.title == taskTitle);
-    Object.setPrototypeOf(taskInCat, Task.prototype);    
+    const category = allLists.find(e => e.name === task.category);
+    const taskInCat = category.todos.find(e => e.title === taskTitle);
+    Object.setPrototypeOf(taskInCat, Task.prototype);
     task.toggleStatus();
     if (task !== taskInCat) {
-    taskInCat.toggleStatus();
+      taskInCat.toggleStatus();
     }
-    displayTasks(currentCategory,allLists,currentCategory);
-  }
+    displayTasks(currentCategory, allLists, currentCategory);
+  };
 
   const taskList = document.getElementById('task-listing');
   taskList.innerHTML = '';
@@ -86,7 +86,7 @@ const displayTasks = (array, allLists, currentCategory) => {
     const task = document.createElement('div');
     task.className = 'task';
     task.id = element.title;
-    const taskBody = document.createElement('div');    
+    const taskBody = document.createElement('div');
     const taskHidden = document.createElement('div');
     taskHidden.className = 'task-hidden';
     taskHidden.id = `task${i}`;
@@ -122,7 +122,7 @@ const displayTasks = (array, allLists, currentCategory) => {
     const editBtn = document.getElementById(`edit${i}`);
     const checkboxBtn = document.getElementById(`checkbox-${element.title}`);
 
-    if(element.completeStatus == false) {
+    if (element.completeStatus === false) {
       taskBody.className = 'task-body';
     } else {
       taskBody.className = 'task-body-c';
@@ -137,7 +137,7 @@ const displayTasks = (array, allLists, currentCategory) => {
     editBtn.addEventListener('click', () => editFunction(element, allLists, currentCategory));
     checkboxBtn.addEventListener('change', () => {
       toggleTask(element.title, allLists, currentCategory);
-    })
+    });
   });
   localStorageVals(allLists);
 };

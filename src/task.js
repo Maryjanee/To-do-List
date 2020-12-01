@@ -29,13 +29,13 @@ class Task {
   }
 }
 
-Task.prototype.toggleStatus = function() {
+Task.prototype.toggleStatus = function () {
   if (this.completeStatus === false) {
     this.completeStatus = true;
   } else {
     this.completeStatus = false;
   }
-}
+};
 
 const createTask = (title, description, priority, category, duedate, allLists, currentCategory) => {
   const task = new Task(title, description, priority, category, duedate);

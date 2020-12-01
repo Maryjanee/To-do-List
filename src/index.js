@@ -2,7 +2,7 @@ import List from './lists';
 import './styles.scss';
 import modalObj from './modal';
 import displayTasks from './displaytasks';
-import { Task, createTask } from './task';
+import { createTask } from './task';
 import localStorageVals from './localStorage';
 
 const categoriesContainer = document.querySelector('.all-categories');
@@ -33,7 +33,7 @@ if (localStorage.allLists) {
 }
 
 let currentCategory = allLists[0];
-displayTasks(currentCategory,allLists,currentCategory);
+displayTasks(currentCategory, allLists, currentCategory);
 
 const updateCurrent = (name) => {
   currentCategory = allLists.find(e => e.name === name);
@@ -71,8 +71,8 @@ const createCategories = (arr, dom) => {
     newOption.innerText = item.name;
     newOption.value = item.name;
     parentDiv.appendChild(newCategory);
-    if (dom == categoriesContainer) {
-    parentDiv.appendChild(delDiv);
+    if (dom === categoriesContainer) {
+      parentDiv.appendChild(delDiv);
     }
 
     parentDiv.addEventListener('mouseover', () => {
@@ -105,17 +105,17 @@ modalObj.btn().onclick = modalObj.btnclick;
 modalObj.span().onclick = modalObj.closeclick;
 
 modalObj.submit().addEventListener('click', () => {
-  let names = allLists.map(e => e.name);
-  if (modalObj.input().value == '') {
-    alert('Add a name to the category')
+  const names = allLists.map(e => e.name);
+  if (modalObj.input().value === '') {
+    alert('Add a name to the category');
   } else if (names.includes(modalObj.input().value)) {
-    alert('Name is already in use')
-  } else {  
-  const newProject = modalObj.input().value;
-  modalObj.input().value = '';
-  const list = new List(newProject);
-  allLists.push(list);
-  createCategories(allLists, categoriesContainer);
+    alert('Name is already in use');
+  } else {
+    const newProject = modalObj.input().value;
+    modalObj.input().value = '';
+    const list = new List(newProject);
+    allLists.push(list);
+    createCategories(allLists, categoriesContainer);
   }
 });
 
@@ -126,10 +126,10 @@ createTaskForm.addEventListener('submit', (e) => {
   const priorityValue = document.getElementById('task-priority').value;
   const duedateValue = document.getElementById('task-duedate').value;
   const categoryValue = document.getElementById('task-category').value;
-  let namesMap = allLists[0].todos.map(e => e.title);
+  const namesMap = allLists[0].todos.map(e => e.title);
   if (titleValue === '' || descriptionValue === '' || priorityValue === '' || duedateValue === '') {
     alert('Please enter all the details for the task');
-  }  else if(namesMap.includes(titleValue)) {
+  } else if (namesMap.includes(titleValue)) {
     alert('Please choose an unused title');
   } else {
     const current = createTask(titleValue, descriptionValue,
