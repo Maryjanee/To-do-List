@@ -9,14 +9,12 @@ const categoriesContainer = document.querySelector('.all-categories');
 const myListsContainer = document.querySelector('#my-lists');
 const taskCategory = document.querySelector('#task-category');
 const createTaskForm = document.getElementById('create-task-form');
-
 const createClose = document.querySelector('#close-create');
 const createTaskBtn = document.querySelector('.add-task-btn');
 
 createTaskBtn.addEventListener('click', () => {
   createTaskForm.style.display = 'block';
 });
-
 
 createClose.addEventListener('click', () => {
   createTaskForm.style.display = 'none';
@@ -72,7 +70,9 @@ const createCategories = (arr, dom) => {
     newOption.innerText = item.name;
     newOption.value = item.name;
     parentDiv.appendChild(newCategory);
+    if (dom == categoriesContainer) {
     parentDiv.appendChild(delDiv);
+    }
 
     parentDiv.addEventListener('mouseover', () => {
       delDiv.style.display = 'block';
