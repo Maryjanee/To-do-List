@@ -2,7 +2,7 @@ import List from './lists';
 import './styles.scss';
 import modalObj from './modal';
 import displayTasks from './displaytasks';
-import { createTask } from './task';
+import { Task, createTask } from './task';
 import localStorageVals from './localStorage';
 
 const categoriesContainer = document.querySelector('.all-categories');
@@ -22,6 +22,7 @@ createClose.addEventListener('click', () => {
 
 let allLists = [];
 
+
 if (localStorage.allLists) {
   allLists = JSON.parse(localStorage.getItem('allLists'));
 } else {
@@ -32,7 +33,7 @@ if (localStorage.allLists) {
 }
 
 let currentCategory = allLists[0];
-displayTasks(currentCategory);
+displayTasks(currentCategory,allLists,currentCategory);
 
 const updateCurrent = (name) => {
   currentCategory = allLists.find(e => e.name === name);

@@ -27,19 +27,18 @@ class Task {
   assignList(list) {
     list.push(this);
   }
+}
 
-  toggleStatus() {
-    if (this.completeStatus === false) {
-      this.completeStatus = true;
-    } else {
-      this.completeStatus = false;
-    }
+Task.prototype.toggleStatus = function() {
+  if (this.completeStatus === false) {
+    this.completeStatus = true;
+  } else {
+    this.completeStatus = false;
   }
 }
 
 const createTask = (title, description, priority, category, duedate, allLists, currentCategory) => {
-   
-  const task = new Task(title, description, priority, category, duedate);
+  const task = new Task(title, description, priority, category, duedate); 
   const all = allLists.find(e => e.name === 'All');
   const choice = allLists.find(e => e.name === category);
   all.todos.push(task);

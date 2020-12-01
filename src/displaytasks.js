@@ -1,4 +1,5 @@
 import localStorageVals from './localStorage';
+import { Task } from './task'
 
 const editForm = document.getElementById('edit-task-form');
 const editCloseBtn = document.querySelector('#close-edit');
@@ -66,6 +67,15 @@ const displayTasks = (array, allLists, currentCategory) => {
     displayTasks(currentCategory, allLists, currentCategory);
   };
 
+  const toggleTask = (task) => {
+    Object.setPrototypeOf(task, Task.prototype);
+    let category = allLists.find(e => e.name == task.category);
+    let taskInCat = category.todos.find(e => e.title == task.title);
+    Object.setPrototypeOf(taskInCat, Task.prototype);
+    task.toggleStatus();
+    taskInCat.toggleStatus();
+  }
+
   const taskList = document.getElementById('task-listing');
   taskList.innerHTML = '';
   array.todos.forEach((element, i) => {
@@ -79,7 +89,7 @@ const displayTasks = (array, allLists, currentCategory) => {
     taskHidden.id = `task${i}`;
 
     taskBody.innerHTML = `<div class="task-body-text">
-                            <input type="checkbox" name="check" id="checkbox">
+                            <input type="checkbox" name="check" id="checkbox-${element.title}">
                             <p>${element.title}</p>
                           </div>
                           <div class="task-body-end">
@@ -107,14 +117,18 @@ const displayTasks = (array, allLists, currentCategory) => {
     const info = document.getElementById(`info${i}`);
     const deleteBtn = document.getElementById(`del${i}`);
     const editBtn = document.getElementById(`edit${i}`);
+    const checkboxBtn = document.getElementById(`checkbox-${element.title}`);
 
     deleteBtn.addEventListener('click', () => {
       deleteTask(element.title, element.category, allLists, currentCategory);
     });
     info.addEventListener('click', () => showInfo(`task${i}`));
     editBtn.addEventListener('click', () => editFunction(element, allLists, currentCategory));
-    localStorageVals(allLists);
+    checkboxBtn.addEventListener('change', () => {
+      toggleTask(element);
+    })
   });
+  localStorageVals(allLists);
 };
 
 editCloseBtn.addEventListener('click', () => {
