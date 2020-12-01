@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
+</head>
+<body class="d-flex">
+  <nav>
+    <div  id="my-lists">
+      <h2 class="list-heading">MyLists</h2>     
+    </div>
+    <div id="categories-container">
+      <h3 id="categories" class="headings">Categories</h3>
+      <div class="img" id='new-list-btn'></div>
+    </div>
+    <div class="all-categories">
+    
+    </div>
+      
+  </nav>
+  <main>
+    <div class="add-task-btn"></div>  
+    <h1 class="text-center">Task Manager</h1>
+    <div id="task-listing">
+      <!-- <div class="task">
+        <div class="task-body">
+          <div class="task-body-text">
+            <input type="checkbox" name="check" id="checkbox">
+            <p>Fix Project</p>
+          </div>
+          <div class="task-body-end">
+            <button class="info-btn">More Info</button>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </div>
+        </div>
+        <div class="task-hidden">
+          <div class="task-hidden-desc">
+            <h5>Description:</h5>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate totam porro omnis nemo corporis nesciunt quae quos ad quis, eveniet optio earum! Laboriosam minima deleniti repellat saepe autem doloremque molestias.</p>
+          </div>
+          <div class="task-hidden-priority">
+            <h5>Priority</h5>
+            <p>High</p>
+          </div>
+          <div class="task-hidden-date">
+            <h5>Due Date</h5>
+            <p>10/12</p>
+          </div>
+
+        </div>
+      </div> -->
+    </div>
+
+
+  </main>
+  <div id="myModal" class="modal">
+    <div class="modal-content">      
+      <div>
+        <label for="listName">New Category Title: </label>
+        <input id="modal-text" type="text" name="listName">
+        <input id="modal-submit-btn" type="submit" value="Create"> 
+      </div>
+      <span class="close">&times;</span>
+    </div>  
+  </div>
+  
+   <div id="taskModal">
+    <div class="task-modal-content">      
+   <form id="create-task-form">
+    <span id="close-create" class="close">&times;</span>
+   <div class="task-field">
+      <label for="task-title">Task Title</label>
+      <input type="text" id="task-title">
+   </div>
+   <div class="task-field">
+      <label for="task-title">Task Description</label>
+      <input type="text" id="task-description">
+   </div>
+   <div class="task-field">
+    <label for="task-priority"> Task Priority</label>
+    <select name="priority" id="task-priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+   </div>
+   <div class="task-field">
+     <label for="Category">Select A Category for your Task</label>
+     <select id="task-category">
+       <option value="unlisted">Unlisted</option>
+    </select>
+   </div>
+   <div class="task-field">
+     <label for="task-duedate">Due Date</label>
+     <input type="date" id="task-duedate">
+   </div>
+   
+   <input type="submit" class="btn" value="Create Task" id="create-task">
+   </form>
+        
+      </div>
+      
+    </div>  
+  </div>
+  <div id="edittaskModal">
+    <div class="task-modal-content">      
+   <form id="edit-task-form">
+    <span id="close-edit" class="close">&times;</span>
+   <div class="task-field">
+      <label for="task-title">Task Title</label>
+      <input type="text" id="edit-task-title">
+   </div>
+   <div class="task-field">
+      <label for="task-title">Task Description</label>
+      <input type="text" id="edit-task-description">
+   </div>
+   <div class="task-field">
+    <label for="task-priority"> Task Priority</label>
+    <select name="priority" id="edit-task-priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+   </div>
+   <div class="edit-task-field">
+     <label for="task-duedate">Due Date</label>
+     <input type="date" id="edit-task-duedate">
+   </div>
+   
+   <input type="submit" class="btn" value="Update Task" id="update-task">
+   </form>
+        
+      </div>
+      
+    </div>  
+  </div>
+
+
+  <script src="main.js"></script>
+</body>
+</html>
