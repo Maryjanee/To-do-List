@@ -92,7 +92,7 @@ const displayTasks = (array, allLists, currentCategory) => {
     taskHidden.id = `task${i}`;
     let stat = '';
     if (element.completeStatus === true) {
-      stat = '-c'
+      stat = '-c';
     }
 
     taskBody.innerHTML = `<div class="task-body-text${stat}">
