@@ -118,6 +118,7 @@ nav {
     justify-content: space-between;
     border-bottom: 1px solid #bdbdbd;
     padding: 0.5em;
+    border-radius: 0.5em;
 
     &-c {
       @extend .task-body;
@@ -132,6 +133,16 @@ nav {
 
       p {
         margin-left: 1em;
+      }
+
+      &-c {
+        @extend .task-body-text;
+
+        p {
+          margin-left: 1em;
+          color: #333;
+          text-decoration: line-through;
+        }
       }
     }
 
@@ -150,18 +161,30 @@ nav {
         padding: 0.5em;
         border-radius: 0.5em;
         margin-right: 0.5em;
+
+        &-c {
+          display: none;
+        }
       }
 
       .info-btn {
         @extend .edit-btn;
 
         background-color: $yellow;
+
+        &-c {
+          display: none;
+        }
       }
 
       .delete-btn {
         @extend .edit-btn;
 
         background-color: $red;
+
+        &-c {
+          display: none;
+        }
       }
     }
   }

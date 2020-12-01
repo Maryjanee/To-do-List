@@ -90,15 +90,19 @@ const displayTasks = (array, allLists, currentCategory) => {
     const taskHidden = document.createElement('div');
     taskHidden.className = 'task-hidden';
     taskHidden.id = `task${i}`;
+    let stat = '';
+    if (element.completeStatus === true) {
+      stat = '-c'
+    }
 
-    taskBody.innerHTML = `<div class="task-body-text">
+    taskBody.innerHTML = `<div class="task-body-text${stat}">
                             <input type="checkbox" name="check" id="checkbox-${element.title}">
                             <p>${element.title}</p>
                           </div>
                           <div class="task-body-end">
-                            <button class="info-btn" id=info${i}>More Info</button>
-                            <button class="edit-btn" id=edit${i}>Edit</button>
-                            <button class="delete-btn" id=del${i}>Delete</button>
+                            <button class="info-btn${stat}" id=info${i}>More Info</button>
+                            <button class="edit-btn${stat}" id=edit${i}>Edit</button>
+                            <button class="delete-btn${stat}" id=del${i}>Delete</button>
                           </div>`;
     taskHidden.innerHTML = `<div class="task-hidden-desc">
                               <h5>Description:</h5>
