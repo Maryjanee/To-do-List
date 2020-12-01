@@ -118,8 +118,11 @@ createTaskForm.addEventListener('submit', (e) => {
   const priorityValue = document.getElementById('task-priority').value;
   const duedateValue = document.getElementById('task-duedate').value;
   const categoryValue = document.getElementById('task-category').value;
+  let namesMap = allLists[0].todos.map(e => e.title);
   if (titleValue === '' || descriptionValue === '' || priorityValue === '' || duedateValue === '') {
     alert('Please enter all the details for the task');
+  }  else if(namesMap.includes(titleValue)) {
+    alert('Please choose an unused title');
   } else {
     const current = createTask(titleValue, descriptionValue,
       priorityValue, categoryValue, duedateValue, allLists, currentCategory);
