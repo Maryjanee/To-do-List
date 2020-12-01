@@ -17,7 +17,7 @@ createTaskBtn.addEventListener('click', () => {
   createTaskForm.style.display = 'block';
 });
 
-localStorage.clear();
+
 createClose.addEventListener('click', () => {
   createTaskForm.style.display = 'none';
 });

@@ -10,12 +10,18 @@ The application has the following functions
 - Users can delete categories.
 
 
+![create a task](./src/assets/create-a-task.png)
+
 ## Built With
 
 - HTML
 - SCSS
 - Javascript
 - Webpack 5.4
+
+
+## Live Demo
+[Try It Here](https://rawcdn.githack.com/Maryjanee/To-do-List/23e9eb022471bc2cd3d8134424e639f25d136145/dist/index.html)
 
 
 
