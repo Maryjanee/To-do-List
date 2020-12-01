@@ -13,6 +13,59 @@ const findTask = (task, allLists) => {
 };
 
 const displayTasks = (array, allLists, currentCategory) => {
+  const showInfo = (index) => {
+    const element = document.getElementById(index);
+
+    if (element.style.display === 'none') {
+      element.style.display = 'flex';
+    } else {
+      element.style.display = 'none';
+    }
+  };
+
+  const changeObjParams = (obj, title, description, priority, duedate) => {
+    obj.title = title;
+    obj.description = description;
+    obj.priority = priority;
+    obj.duedate = duedate;
+    return obj;
+  };
+
+  const editFunction = (element, allLists, currentCategory) => {
+    editForm.style.display = 'block';
+    editForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const editTitle = document.getElementById('edit-task-title').value;
+      const editDescription = document.getElementById('edit-task-description').value;
+      const editPriority = document.getElementById('edit-task-priority').value;
+      const editDuedate = document.getElementById('edit-task-duedate').value;
+      if (editTitle === '' || editDescription === '' || editDuedate === '') {
+        alert('Please enter all the details to update the task');
+      } else {
+        const tasks = findTask(element, allLists);
+        changeObjParams(tasks[0], editTitle, editDescription, editPriority, editDuedate);
+        changeObjParams(tasks[1], editTitle, editDescription, editPriority, editDuedate);
+
+        document.getElementById('edit-task-title').value = '';
+        document.getElementById('edit-task-description').value = '';
+        document.getElementById('edit-task-priority').value = '';
+        document.getElementById('edit-task-duedate').value = '';
+        displayTasks(currentCategory, allLists, currentCategory);
+      }
+    });
+  };
+
+  const deleteTask = (taskTitle, category, allLists, currentCategory) => {
+    const choice = allLists.find(e => e.name === category);
+    const delIndex = choice.todos.findIndex(e => e.title === taskTitle);
+    choice.todos.splice(delIndex, 1);
+
+    const allTasks = allLists.find(e => e.name === 'All');
+    const allTasksIndex = allTasks.todos.findIndex(e => e.title === taskTitle);
+    allTasks.todos.splice(allTasksIndex, 1);
+    displayTasks(currentCategory, allLists, currentCategory);
+  };
+
   const taskList = document.getElementById('task-listing');
   taskList.innerHTML = '';
   array.todos.forEach((element, i) => {
@@ -67,58 +120,5 @@ const displayTasks = (array, allLists, currentCategory) => {
 editCloseBtn.addEventListener('click', () => {
   editForm.style.display = 'none';
 });
-
-const showInfo = (index) => {
-  const element = document.getElementById(index);
-
-  if (element.style.display === 'none') {
-    element.style.display = 'flex';
-  } else {
-    element.style.display = 'none';
-  }
-};
-
-const changeObjParams = (obj, title, description, priority, duedate) => {
-  obj.title = title;
-  obj.description = description;
-  obj.priority = priority;
-  obj.duedate = duedate;
-  return obj;
-};
-
-const editFunction = (element, allLists, currentCategory) => {
-  editForm.style.display = 'block';
-  editForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const editTitle = document.getElementById('edit-task-title').value;
-    const editDescription = document.getElementById('edit-task-description').value;
-    const editPriority = document.getElementById('edit-task-priority').value;
-    const editDuedate = document.getElementById('edit-task-duedate').value;
-    if (editTitle === '' || editDescription === '' || editDuedate === '') {
-      alert('Please enter all the details to update the task');
-    } else {
-      const tasks = findTask(element, allLists);
-      changeObjParams(tasks[0], editTitle, editDescription, editPriority, editDuedate);
-      changeObjParams(tasks[1], editTitle, editDescription, editPriority, editDuedate);
-
-      document.getElementById('edit-task-title').value = '';
-      document.getElementById('edit-task-description').value = '';
-      document.getElementById('edit-task-priority').value = '';
-      document.getElementById('edit-task-duedate').value = '';
-      displayTasks(currentCategory, allLists, currentCategory);
-    }
-  });
-};
-
-const deleteTask = (taskTitle, category, allLists, currentCategory) => {
-  const choice = allLists.find(e => e.name === category);
-  const delIndex = choice.todos.findIndex(e => e.title === taskTitle);
-  choice.todos.splice(delIndex, 1);
-
-  const allTasks = allLists.find(e => e.name === 'All');
-  const allTasksIndex = allTasks.todos.findIndex(e => e.title === taskTitle);
-  allTasks.todos.splice(allTasksIndex, 1);
-  displayTasks(currentCategory, allLists, currentCategory);
-};
 
 export default displayTasks;
