@@ -133,6 +133,15 @@ createTaskForm.addEventListener('submit',(e)=>{
     alert ("Please enter all the details for the task");
   }else{
     let current = createTask(titleValue, descriptionValue, priorityValue, categoryValue, duedateValue, allLists, currentCategory);
+    document.getElementById('task-title').value = " ";
+    document.getElementById('task-description').value = ""
+    document.getElementById('task-priority').value = "" ;
+    document.getElementById('task-category').value = "";
+    document.getElementById('task-duedate').value = "";
+    
+    
+    
+    
    displayTasks(current, allLists, currentCategory);
   }
   

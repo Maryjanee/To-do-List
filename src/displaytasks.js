@@ -94,6 +94,11 @@ const editFunction = (element, allLists, currentCategory) => {
       alert ("Please enter all the details to update the task");
     }else{
       let tasks =  findTask(element, allLists);
+      document.getElementById('edit-task-title').value = " ";
+    document.getElementById('edit-task-description').value = ""
+    document.getElementById('edit-task-priority').value = "" ;
+    document.getElementById('edit-task-category').value = "";
+    document.getElementById('edit-task-duedate').value = "";
   
       // if (element.category !== editCategory) {
       //   let previousList = allLists.find(e => e.name == element.category);

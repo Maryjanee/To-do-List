@@ -48,7 +48,9 @@ const createTask = (title, description, priority, category, duedate, allLists, c
   return currentCategory
 }
 
-
-
+const clearFormFields = (field) => {
+  
+  
+}
 
 export {Task, createTask}
