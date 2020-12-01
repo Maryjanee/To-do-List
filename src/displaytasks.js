@@ -67,13 +67,17 @@ const displayTasks = (array, allLists, currentCategory) => {
     displayTasks(currentCategory, allLists, currentCategory);
   };
 
-  const toggleTask = (task) => {
+  const toggleTask = (taskTitle, allLists, currentCategory) => {
+    let task = allLists[0].todos.find(e => e.title == taskTitle);
     Object.setPrototypeOf(task, Task.prototype);
     let category = allLists.find(e => e.name == task.category);
-    let taskInCat = category.todos.find(e => e.title == task.title);
-    Object.setPrototypeOf(taskInCat, Task.prototype);
+    let taskInCat = category.todos.find(e => e.title == taskTitle);
+    Object.setPrototypeOf(taskInCat, Task.prototype);    
     task.toggleStatus();
+    if (task !== taskInCat) {
     taskInCat.toggleStatus();
+    }
+    displayTasks(currentCategory,allLists,currentCategory);
   }
 
   const taskList = document.getElementById('task-listing');
@@ -82,8 +86,7 @@ const displayTasks = (array, allLists, currentCategory) => {
     const task = document.createElement('div');
     task.className = 'task';
     task.id = element.title;
-    const taskBody = document.createElement('div');
-    taskBody.className = 'task-body';
+    const taskBody = document.createElement('div');    
     const taskHidden = document.createElement('div');
     taskHidden.className = 'task-hidden';
     taskHidden.id = `task${i}`;
@@ -119,13 +122,21 @@ const displayTasks = (array, allLists, currentCategory) => {
     const editBtn = document.getElementById(`edit${i}`);
     const checkboxBtn = document.getElementById(`checkbox-${element.title}`);
 
+    if(element.completeStatus == false) {
+      taskBody.className = 'task-body';
+    } else {
+      taskBody.className = 'task-body-c';
+      checkboxBtn.checked = true;
+    }
+
+
     deleteBtn.addEventListener('click', () => {
       deleteTask(element.title, element.category, allLists, currentCategory);
     });
     info.addEventListener('click', () => showInfo(`task${i}`));
     editBtn.addEventListener('click', () => editFunction(element, allLists, currentCategory));
     checkboxBtn.addEventListener('change', () => {
-      toggleTask(element);
+      toggleTask(element.title, allLists, currentCategory);
     })
   });
   localStorageVals(allLists);

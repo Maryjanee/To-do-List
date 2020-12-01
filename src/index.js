@@ -12,6 +12,7 @@ const createTaskForm = document.getElementById('create-task-form');
 const createClose = document.querySelector('#close-create');
 const createTaskBtn = document.querySelector('.add-task-btn');
 
+
 createTaskBtn.addEventListener('click', () => {
   createTaskForm.style.display = 'block';
 });
@@ -22,12 +23,11 @@ createClose.addEventListener('click', () => {
 
 let allLists = [];
 
-
 if (localStorage.allLists) {
   allLists = JSON.parse(localStorage.getItem('allLists'));
 } else {
   const allTasks = new List('All');
-  const unlisted = new List('Unlisted');
+  const unlisted = new List('Default');
   allLists.push(allTasks);
   allLists.push(unlisted);
 }
@@ -48,8 +48,8 @@ const createCategories = (arr, dom) => {
   }
   taskCategory.innerHTML = '';
   const unlisted = document.createElement('option');
-  unlisted.innerText = 'Unlisted';
-  unlisted.value = 'Unlisted';
+  unlisted.innerText = 'Default';
+  unlisted.value = 'Default';
 
   taskCategory.appendChild(unlisted);
 
@@ -105,11 +105,18 @@ modalObj.btn().onclick = modalObj.btnclick;
 modalObj.span().onclick = modalObj.closeclick;
 
 modalObj.submit().addEventListener('click', () => {
+  let names = allLists.map(e => e.name);
+  if (modalObj.input().value == '') {
+    alert('Add a name to the category')
+  } else if (names.includes(modalObj.input().value)) {
+    alert('Name is already in use')
+  } else {  
   const newProject = modalObj.input().value;
   modalObj.input().value = '';
   const list = new List(newProject);
   allLists.push(list);
   createCategories(allLists, categoriesContainer);
+  }
 });
 
 createTaskForm.addEventListener('submit', (e) => {

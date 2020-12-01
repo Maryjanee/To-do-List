@@ -119,6 +119,14 @@ nav {
     border-bottom: 1px solid #bdbdbd;
     padding: 0.5em;
 
+    &-c {
+      @extend .task-body;
+
+      background-color: #dddddd;      
+    }
+
+
+
     &-text {
       display: flex;
       align-items: center;

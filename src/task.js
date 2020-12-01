@@ -38,7 +38,7 @@ Task.prototype.toggleStatus = function() {
 }
 
 const createTask = (title, description, priority, category, duedate, allLists, currentCategory) => {
-  const task = new Task(title, description, priority, category, duedate); 
+  const task = new Task(title, description, priority, category, duedate);
   const all = allLists.find(e => e.name === 'All');
   const choice = allLists.find(e => e.name === category);
   all.todos.push(task);
