@@ -1,4 +1,4 @@
-import List from  '../lists'
+import List from '../lists';
 
 
 describe('Create a category', () => {

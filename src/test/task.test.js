@@ -1,4 +1,4 @@
-import { Task } from '../task'
+import { Task } from '../task';
 
 describe('Create an instance of Task', () => {
   const task = new Task('title', 'description', 'priority', 'category', 'duedate', 'allLists', 'currentCategory');
