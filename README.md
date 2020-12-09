@@ -19,10 +19,12 @@ The application has the following functions
 - Javascript
 - Webpack 5.4
 
+## Tested With
+- Jest 26.6.3
+
 
 ## Live Demo
 [Try It Here](https://raw.githack.com/Maryjanee/To-do-List/app/dist/index.html)
-
 
 
 ### Prerequisites
@@ -40,6 +42,10 @@ git clone git@github.com:Maryjanee/To-do-List.git
 2. Run `cd To-do-List` to move inside the downloaded repository.
 
 3. The project contains a `package.json` file the manages its dependencies.Install them by running the command `npm install`
+
+4. Run `npm run-script build` and `npm start` to view the project locally
+
+5. Run `npm run test` to run tests.
 
 
 
